@@ -31,6 +31,19 @@ npm run build
 npm run start
 ```
 
+## Styles
+
+Learn about Tailwind
+https://tailwindcss.com/
+
+## UI component Library
+
+Beautifully designed components that you can copy and paste into your app
+https://ui.shadcn.com/docs/components
+
+Generate UIs with AI
+https://v0.dev
+
 ## Deployment
 
 > Cloudflare does _not_ use `wrangler.toml` to configure deployment bindings.
@@ -49,4 +62,5 @@ npm run deploy
 ```
 
 [bindings]: https://developers.cloudflare.com/pages/functions/bindings/
+
 # hamza

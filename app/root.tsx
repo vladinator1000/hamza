@@ -5,6 +5,13 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
+import type { LinksFunction } from '@remix-run/node'
+
+import tailwind from '../app/tailwind.css?url'
+
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: tailwind },
+]
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,9 +27,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ScrollRestoration />
         <Scripts />
 
-        <footer>
-          
-        </footer>
+        <footer></footer>
       </body>
     </html>
   )

@@ -1,6 +1,7 @@
 {
-    "recommendations": [
-        "ms-playwright.playwright",
-        "codeium.codeium"
-    ]
+  "recommendations": [
+    "ms-playwright.playwright",
+    "codeium.codeium",
+    "bradlc.vscode-tailwindcss"
+  ]
 }

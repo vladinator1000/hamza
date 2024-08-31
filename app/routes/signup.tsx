@@ -21,15 +21,7 @@ export default function Signup() {
   const actionData = useActionData<typeof action>()
 
   return (
-    <form
-      method="post"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '5px',
-        maxWidth: 300,
-      }}
-    >
+    <form method="post" className="flex flex-col gap-5 max-w-[300px]">
       <h1>Signup</h1>
       <input name="name" placeholder="name" />
       <input name="email" placeholder="email" />
