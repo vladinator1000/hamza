@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
-import { Form, Link, useActionData } from '@remix-run/react'
-import { ActionFunctionArgs, json, redirect } from '@remix-run/cloudflare'
+import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
+import { ActionFunctionArgs, json } from '@remix-run/cloudflare'
 
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
@@ -31,14 +31,35 @@ export async function action(arg: ActionFunctionArgs) {
       password: passwordHash,
     })
 
-    return redirect('/')
+    return json({ success: true })
   } catch (error) {
-    return json(error)
+    return json({ success: false, error })
   }
 }
 
 export default function Component() {
-  const error = useActionData<typeof action>()
+  const actionData = useActionData<typeof action>()
+  const navigation = useNavigation()
+
+  if (actionData?.success) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-center">
+              Sign Up
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-center">Success! You can now </p>
+            <Button asChild className="w-full">
+              <Link to="/signin">Sign in</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">
@@ -77,14 +98,18 @@ export default function Component() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" name="password" required />
             </div>
-            {error ? (
+            {actionData?.error ? (
               <Alert variant="destructive">
-                <AlertDescription>{JSON.stringify(error)}</AlertDescription>
+                <AlertDescription>{actionData.error.message}</AlertDescription>
               </Alert>
             ) : null}
 
-            <Button type="submit" className="w-full">
-              Sign Up
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={navigation.state === 'submitting'}
+            >
+              {navigation.state === 'submitting' ? 'Loading...' : 'Sign Up'}
             </Button>
           </Form>
         </CardContent>
