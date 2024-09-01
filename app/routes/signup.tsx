@@ -50,7 +50,7 @@ export default function Component() {
               Sign Up
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-3">
             <p className="text-center">Success! You can now </p>
             <Button asChild className="w-full">
               <Link to="/signin">Sign in</Link>
